@@ -1,0 +1,25 @@
+:host {
+  display: block;
+
+  mat-form-field,
+  mat-checkbox {
+    display: block;
+  }
+
+  .question {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .other {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .add {
+    margin: 1rem 0;
+    text-decoration: underline;
+  }
+}

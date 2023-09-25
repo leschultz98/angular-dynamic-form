@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  padding: 2rem;
+  width: 400px;
+  max-height: 80vh;
+  overflow: auto;
+
+  mat-form-field {
+    display: block;
+  }
+
+  .add-answer {
+    margin-bottom: 1rem;
+    color: blue;
+    cursor: pointer;
+  }
+
+  .submit {
+    margin-top: 1rem;
+  }
+}

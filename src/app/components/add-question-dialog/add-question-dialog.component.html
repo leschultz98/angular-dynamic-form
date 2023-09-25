@@ -1,0 +1,42 @@
+<h2>Add a New Question</h2>
+
+<mat-form-field>
+  <mat-select [(value)]="type">
+    <mat-option *ngFor="let type of types" [value]="type.value">
+      {{ type.title }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Type question here" [(ngModel)]="question" />
+</mat-form-field>
+
+<ng-container *ngIf="type === 'checkbox'">
+  <mat-form-field *ngIf="count >= 1">
+    <input matInput placeholder="Add answer option 1" [(ngModel)]="option1" />
+  </mat-form-field>
+  <mat-form-field *ngIf="count >= 2">
+    <input matInput placeholder="Add answer option 2" [(ngModel)]="option2" />
+  </mat-form-field>
+  <mat-form-field *ngIf="count >= 3">
+    <input matInput placeholder="Add answer option 3" [(ngModel)]="option3" />
+  </mat-form-field>
+  <mat-form-field *ngIf="count >= 4">
+    <input matInput placeholder="Add answer option 4" [(ngModel)]="option4" />
+  </mat-form-field>
+  <mat-form-field *ngIf="count >= 5">
+    <input matInput placeholder="Add answer option 5" [(ngModel)]="option5" />
+  </mat-form-field>
+
+  <div class="add-answer" (click)="increaseCount()">+ Add another answer</div>
+</ng-container>
+
+<div>
+  <mat-checkbox *ngIf="type === 'checkbox'" [(ngModel)]="specifyAnswer">
+    Allow user to specify their own answer
+  </mat-checkbox>
+  <mat-checkbox [(ngModel)]="isRequired"> This field is required </mat-checkbox>
+</div>
+
+<button mat-flat-button color="primary" class="submit" type="button" (click)="submit()">Submit</button>

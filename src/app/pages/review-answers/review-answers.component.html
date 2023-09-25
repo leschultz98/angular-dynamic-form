@@ -1,0 +1,21 @@
+<div class="item" *ngFor="let form of dynamicFormService.forms$ | async">
+  <div class="question">{{ form.question }}</div>
+
+  <div *ngIf="form.type === 'paragraph'">{{ form.control.value }}</div>
+
+  <ng-container *ngIf="form.type === 'checkbox'">
+    <ng-container *ngIf="form.group.value as value">
+      <div *ngIf="$any(value).option1">{{ form.options.option1 }}</div>
+      <div *ngIf="$any(value).option2">{{ form.options.option2 }}</div>
+      <div *ngIf="$any(value).option3">{{ form.options.option3 }}</div>
+      <div *ngIf="$any(value).option4">{{ form.options.option4 }}</div>
+      <div *ngIf="$any(value).option5">{{ form.options.option5 }}</div>
+
+      <div *ngIf="$any(value).other">
+        {{ form.options.other }} <span *ngIf="form.other.value as other">- {{ other }}</span>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<a [routerLink]="['/form/builder']">Back to Forms Builder</a>

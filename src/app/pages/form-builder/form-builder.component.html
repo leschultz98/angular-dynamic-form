@@ -1,0 +1,27 @@
+<ng-container *ngFor="let form of dynamicFormService.forms$ | async">
+  <div class="question">{{ form.question }} <span *ngIf="form.isRequired">*</span></div>
+
+  <mat-form-field *ngIf="form.type === 'paragraph'">
+    <textarea matInput [formControl]="form.control"></textarea>
+    <mat-error *ngIf="form.control.hasError('required')">This field is <strong>required</strong> </mat-error>
+  </mat-form-field>
+
+  <div *ngIf="form.type === 'checkbox'" [formGroup]="form.group">
+    <mat-checkbox *ngIf="form.options.option1" formControlName="option1">{{ form.options.option1 }}</mat-checkbox>
+    <mat-checkbox *ngIf="form.options.option2" formControlName="option2">{{ form.options.option2 }}</mat-checkbox>
+    <mat-checkbox *ngIf="form.options.option3" formControlName="option3">{{ form.options.option3 }}</mat-checkbox>
+    <mat-checkbox *ngIf="form.options.option4" formControlName="option4">{{ form.options.option4 }}</mat-checkbox>
+    <mat-checkbox *ngIf="form.options.option5" formControlName="option5">{{ form.options.option5 }}</mat-checkbox>
+
+    <div class="other">
+      <mat-checkbox *ngIf="form.options.other" formControlName="other">{{ form.options.other }}</mat-checkbox>
+      <mat-form-field>
+        <input matInput [formControl]="form.other" />
+      </mat-form-field>
+    </div>
+  </div>
+</ng-container>
+
+<div class="add" (click)="openDialog()">Add New Question</div>
+
+<button mat-flat-button color="primary" (click)="review()">Review my answers ></button>
