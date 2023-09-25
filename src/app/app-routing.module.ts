@@ -5,6 +5,11 @@ import { ReviewAnswersComponent } from './pages/review-answers/review-answers.co
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'form/builder',
+    pathMatch: 'full',
+  },
+  {
     path: 'form/builder',
     component: FormBuilderComponent,
     title: 'Form builder',
