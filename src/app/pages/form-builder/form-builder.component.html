@@ -1,24 +1,30 @@
-<ng-container *ngFor="let form of dynamicFormService.forms$ | async">
-  <div class="question">{{ form.question }} <span *ngIf="form.isRequired">*</span></div>
+<ng-container *ngFor="let config of dynamicFormService.forms$ | async">
+  <div class="question">{{ config.question }} <span *ngIf="config.isRequired">*</span></div>
 
-  <mat-form-field *ngIf="form.type === 'paragraph'">
-    <textarea matInput [formControl]="form.control"></textarea>
-    <mat-error *ngIf="form.control.hasError('required')">This field is <strong>required</strong> </mat-error>
+  <mat-form-field *ngIf="config.type === 'paragraph'">
+    <textarea matInput [formControl]="config.control"></textarea>
+    <mat-error *ngIf="config.group.touched && config.control.hasError('required')">
+      This field is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
 
-  <div *ngIf="form.type === 'checkbox'" [formGroup]="form.group">
-    <mat-checkbox *ngIf="form.options.option1" formControlName="option1">{{ form.options.option1 }}</mat-checkbox>
-    <mat-checkbox *ngIf="form.options.option2" formControlName="option2">{{ form.options.option2 }}</mat-checkbox>
-    <mat-checkbox *ngIf="form.options.option3" formControlName="option3">{{ form.options.option3 }}</mat-checkbox>
-    <mat-checkbox *ngIf="form.options.option4" formControlName="option4">{{ form.options.option4 }}</mat-checkbox>
-    <mat-checkbox *ngIf="form.options.option5" formControlName="option5">{{ form.options.option5 }}</mat-checkbox>
+  <div *ngIf="config.type === 'checkbox'" [formGroup]="config.group">
+    <mat-checkbox *ngIf="config.options.option1" formControlName="option1">{{ config.options.option1 }}</mat-checkbox>
+    <mat-checkbox *ngIf="config.options.option2" formControlName="option2">{{ config.options.option2 }}</mat-checkbox>
+    <mat-checkbox *ngIf="config.options.option3" formControlName="option3">{{ config.options.option3 }}</mat-checkbox>
+    <mat-checkbox *ngIf="config.options.option4" formControlName="option4">{{ config.options.option4 }}</mat-checkbox>
+    <mat-checkbox *ngIf="config.options.option5" formControlName="option5">{{ config.options.option5 }}</mat-checkbox>
 
-    <div class="other">
-      <mat-checkbox *ngIf="form.options.other" formControlName="other">{{ form.options.other }}</mat-checkbox>
+    <div *ngIf="config.specifyAnswer" class="other">
+      <mat-checkbox formControlName="other">Other</mat-checkbox>
       <mat-form-field>
-        <input matInput [formControl]="form.other" />
+        <input matInput [formControl]="config.other" />
       </mat-form-field>
     </div>
+
+    <mat-error *ngIf="config.group.touched && config.group.hasError('required')">
+      This field is <strong>required</strong>
+    </mat-error>
   </div>
 </ng-container>
 

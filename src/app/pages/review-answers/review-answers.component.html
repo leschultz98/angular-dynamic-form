@@ -12,7 +12,7 @@
       <div *ngIf="$any(value).option5">{{ form.options.option5 }}</div>
 
       <div *ngIf="$any(value).other">
-        {{ form.options.other }} <span *ngIf="form.other.value as other">- {{ other }}</span>
+        Other <span *ngIf="form.other.value as other">- {{ other }}</span>
       </div>
     </ng-container>
   </ng-container>

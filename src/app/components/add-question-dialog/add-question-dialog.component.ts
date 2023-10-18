@@ -8,6 +8,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { QuestionForm } from '../../shared/models';
+import { checkboxRequired } from '../../shared/validators';
 
 interface Type {
   value: string;
@@ -66,20 +67,22 @@ export class AddQuestionDialogComponent {
         option3: this.option3,
         option4: this.option4,
         option5: this.option5,
-        other: this.specifyAnswer ? 'Other' : '',
       },
       specifyAnswer: this.specifyAnswer,
       isRequired: this.isRequired,
       other: new FormControl(),
       control: new FormControl(undefined, this.isRequired ? [Validators.required] : []),
-      group: this.fb.group({
-        option1: false,
-        option2: false,
-        option3: false,
-        option4: false,
-        option5: false,
-        other: false,
-      }),
+      group: this.fb.group(
+        {
+          option1: false,
+          option2: false,
+          option3: false,
+          option4: false,
+          option5: false,
+          other: false,
+        },
+        { validators: this.isRequired ? [checkboxRequired] : [] },
+      ),
     });
   }
 }
